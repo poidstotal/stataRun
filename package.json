@@ -1,6 +1,6 @@
 {
-    "name": "stata-run",
-    "displayName": "Stata Run",
+    "name": "stata_run",
+    "displayName": "stataRun",
     "description": "Run Stata Code from vsCode",
     "version": "0.0.1",
     "publisher": "PoidsTotal",
@@ -11,19 +11,65 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello",
-        "onCommand:extension.runAll"
+        "onCommand:extension.runAll",
+        "onCommand:extension.runSelection"
     ],
-    "main": "./extension",
+    "main": "./extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "extension.sayHello",
-                "title": "Hello World"
+                "command": "extension.runAll",
+                "title": "StataRun: All"
             },
             {
-                "command": "extension.runAll",
-                "title": "Run All"
+                "command": "extension.runSelection",
+                "title": "StataRun Selection"
+            }
+        ],
+        "configuration": [
+            {
+                "type": "object",
+                "title": "stataRun",
+                "properties": {
+                    "stata_run.stataPath": {
+                        "type": "string",
+                        "default": "C:\\Program Files (x86)\\Stata15\\StataSE-64.exe",
+                        "description": "Absolute path to Stata executable. Only applicable for Windows."
+                    },
+                    "stata_run.whichApp": {
+                        "type": "string",
+                        "enum": [
+                            "stataMP",
+                            "stataIC",
+                            "stataSE",
+                            "xquartz"
+                        ],
+                        "default": "stataSE",
+                        "description": "Which application to send code to. Only applicable for MacOS."
+                    },
+                    "stata_run.advancePosition": {
+                        "type": "boolean",
+                        "default": "false",
+                        "description": "Cursor advances to the next line after sending the current line when there is no selection."
+                    },
+                    "stata_run.skipComments": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "When 'advancePosition' is true, skip lines that contain only comments"
+                    },
+                    "stata_run.focusWindow": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "After code is sent, bring focus to where it was sent"
+                    },
+                    "stata_run.pasteSpeed": {
+                        "type": "number",
+                        "minimum": "1.0",
+                        "maximum": "10",
+                        "default": "true",
+                        "description": " This is only applicable for XQuartz. This value changes the amount of time the program waits between switching to the XQuartz window, pasting code, and sending enter'. The only way to send code to XQuartz is to use the clipboard, and the responsiveness of sending code will depend on the speed of your internet connection. If the copy-pasting isn't working, try increasing the value. Decreasing the value will run your code faster. Value must be between 0.1 and 10."
+                    }
+                }
             }
         ]
     },
@@ -32,10 +78,25 @@
         "test": "node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
-        "eslint": "^4.11.0",
+        "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
-    }
+        "eslint": "^4.11.0",
+        "vscode": "^1.1.6"
+    },
+    "dependencies": {
+        "delay": "^2.0.0",
+        "escape-string-applescript": "^2.0.0",
+        "path": "0.12.7",
+        "run-applescript": "^3.2.0",
+        "winax": "1.0.13"
+    },
+    "repository": "https://github.com/poidstotal/stataRun",
+    "bugs": {
+        "url": "https://github.com/poidstotal/stataRun/issues"
+    },
+    "keywords": [
+        "Stata",
+        "stataRun"
+    ],
+    "license": "MIT"
 }
