@@ -1,8 +1,8 @@
 {
-    "name": "stata_run",
+    "name": "stataRrun",
     "displayName": "stataRun",
     "description": "Run Stata Code from vsCode",
-    "version": "0.0.1",
+    "version": "1.1.0",
     "publisher": "PoidsTotal",
     "engines": {
         "vscode": "^1.25.0"
@@ -71,6 +71,22 @@
                     }
                 }
             }
+        ],
+        "keybindings":[
+            {
+                "key": "shift+alt+d",
+                "mac": "shift+cmd+d",
+                "command": "extension.runAll",
+                "when": "editorTextFocus"
+            },
+            {
+                "key": "shift+ctl+d",
+                "mac": "ctrl+alt+d",
+                "command": "extension.runSelection",
+                "when": "editorTextFocus"
+            }
+
+            
         ]
     },
     "scripts": {
@@ -87,7 +103,9 @@
         "delay": "^2.0.0",
         "escape-string-applescript": "^2.0.0",
         "path": "0.12.7",
-        "run-applescript": "^3.2.0",
+        "run-applescript": "^3.2.0"
+    },
+    "optionalDependencies": {
         "winax": "1.0.13"
     },
     "repository": "https://github.com/poidstotal/stataRun",
