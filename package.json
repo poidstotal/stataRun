@@ -1,9 +1,10 @@
 {
     "name": "stataRrun",
+    "icon": "images/icon.png",
     "displayName": "stataRun",
     "description": "Run Stata Code from vsCode",
     "version": "1.1.0",
-    "publisher": "PoidsTotal",
+    "publisher": "Yeaoh",
     "engines": {
         "vscode": "^1.25.0"
     },
