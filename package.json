@@ -1,5 +1,5 @@
 {
-    "name": "stataRrun",
+    "name": "stataRun",
     "icon": "images/icon.png",
     "displayName": "stataRun",
     "description": "Run Stata Code from vsCode",
