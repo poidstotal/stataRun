@@ -5,9 +5,9 @@ stataRun allow your to run your stata code (.do .ado ) and command from within V
 ## Features
 
 There are three commands far now:
-Run All : This will run the entire file
-Run Slection: To run a given slection. If no selection is made it default to Run All
-Run Current: This will run the current line code
+- Run All : This will run the entire file
+- Run Slection: To run a given slection. If no selection is made it default to Run All
+- Run Current: This will run the current line code
 
 ## Requirements
 
