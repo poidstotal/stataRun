@@ -1,9 +1,9 @@
 {
     "name": "stataRun",
-    "icon": "./images/icon.png",
+    "icon": "images/icon.png",
     "displayName": "stataRun",
     "description": "Run Stata Code from vsCode",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "publisher": "Yeaoh",
     "engines": {
         "vscode": "^1.25.0"
@@ -13,18 +13,33 @@
     ],
     "activationEvents": [
         "onCommand:extension.runAll",
-        "onCommand:extension.runSelection"
+        "onCommand:extension.runSelection",
+        "onCommand:extension.runCurrent",
+        "onCommand:extension.runDown",
+        "onCommand:extension.runFront"
     ],
     "main": "./extension.js",
     "contributes": {
         "commands": [
             {
                 "command": "extension.runAll",
-                "title": "StataRun: All"
+                "title": "Run entire File" 
             },
             {
                 "command": "extension.runSelection",
-                "title": "StataRun Selection"
+                "title": "Run Selection"
+            },
+            {
+                "command": "extension.runCurrent",
+                "title": "Run Current line"
+            },
+            {
+                "command": "extension.runDown",
+                "title": "Run to Bottom"
+            },
+            {
+                "command": "extension.runFront",
+                "title": "Run from front line"
             }
         ],
         "configuration": [
@@ -75,15 +90,33 @@
         ],
         "keybindings":[
             {
-                "key": "shift+alt+d",
-                "mac": "shift+cmd+d",
+                "key": "shift+ctrl+a",
+                "mac": "shift+cmd+a",
                 "command": "extension.runAll",
                 "when": "editorTextFocus"
             },
             {
-                "key": "shift+ctl+d",
-                "mac": "ctrl+alt+d",
+                "key": "shift+ctl+s",
+                "mac": "shift+cmd+s",
                 "command": "extension.runSelection",
+                "when": "editorTextFocus"
+            },
+            {
+                "key": "shift+ctl+c",
+                "mac": "shift+cmd+c",
+                "command": "extension.runCurrent",
+                "when": "editorTextFocus"
+            },
+            {
+                "key": "shift+ctl+d",
+                "mac": "shift+cmd+d",
+                "command": "extension.runDown",
+                "when": "editorTextFocus"
+            },
+            {
+                "key": "shift+ctl+f",
+                "mac": "shift+cmd+f",
+                "command": "extension.runFront",
                 "when": "editorTextFocus"
             }
 

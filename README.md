@@ -1,13 +1,15 @@
 # Description
 
-stataRun allow your to run your stata code (.do .ado ) and command from within Visual Studio Code editor. Thus you can take great advantage of an editor for syntax highlighting.
+stataRun allow you to run  stata codes (.do .ado ) and commands from within Visual Studio Code editor. Thus you can take  advantage of an editor for syntax highlighting. You may want to install [Stata-Enhanced](https://marketplace.visualstudio.com/items?itemName=kylebarron.stata-enhanced) and [Stata-Language](https://marketplace.visualstudio.com/items?itemName=mdob2k.stata-language) for syntax highlighting and other features
 
 ## Features
 
-There are three commands far now:
-- Run All : This will run the entire file
-- Run Slection: To run a given slection. If no selection is made it default to Run All
-- Run Current: This will run the current line code
+The following command and keyboard shortcut are implemented(crtl to be replace by cmd on MacOS)
+- shift+ctrl+a: Run All ==> This will run the entire file
+- shift+ctl+s: Run Selection ==> To run a given slection. If no selection is made it default to Run All
+- shift+ctl+c: Run Current ==> This will run the current line code
+- shift+ctl+d: Run from current line to downward
+- shift+ctl+f: Run from first line till current line
 
 ## Requirements
 
@@ -22,9 +24,6 @@ Settings derived from [stata-exec](https://github.com/kylebarron/stata-exec), wh
 
 Only tested with Mac Os so far. Please and try create issues if any. Feel free to contributes.
 
-## Release Notes
-
-First version 0.1.0
 
 # Techinical
 
@@ -32,11 +31,11 @@ Comming soon ...
 
 ## Dependency  
 
-Comming soon ...
+No Dependencies
 
 ## Installation
 
-Comming soon ...
+Install as a normal vscode extension by searcing for stataRun in the vscode extension marketplace
 
 # Miscellaneous
 
