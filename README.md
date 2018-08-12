@@ -13,10 +13,6 @@ The following command and keyboard shortcut are implemented(crtl to be replace b
 
 ## Requirements
 
-Comming soon...
-
-## Available Settings
-
 Settings derived from [stata-exec](https://github.com/kylebarron/stata-exec), which provide the same features for Atom.
 ![run-command](./images/config.png)
 
@@ -24,19 +20,6 @@ Settings derived from [stata-exec](https://github.com/kylebarron/stata-exec), wh
 
 Only tested with Mac Os so far. Please and try create issues if any. Feel free to contributes.
 
-
-# Techinical
-
-Comming soon ...
-
-## Dependency  
-
-No Dependencies
-
 ## Installation
 
 Install as a normal vscode extension by searcing for stataRun in the vscode extension marketplace
-
-# Miscellaneous
-
-## License
