@@ -4,12 +4,12 @@ stataRun allow you to run  stata codes (.do .ado ) and commands from within Visu
 
 ## Features
 
-The following command and keyboard shortcut are implemented(crtl to be replace by cmd on MacOS)
+The following command and keyboard shortcut are implemented (crtl to be replace by cmd on MacOS)
 - shift+ctrl+a: Run All ==> This will run the entire file
-- shift+ctl+s: Run Selection ==> To run a given slection. If no selection is made it default to Run All
-- shift+ctl+c: Run Current ==> This will run the current line code
-- shift+ctl+d: Run from current line to downward
-- shift+ctl+f: Run from first line till current line
+- shift+ctrl+s: Run Selection ==> To run a given slection. If no selection is made it default to Run All
+- shift+ctrl+c: Run Current ==> This will run the current line code
+- shift+ctrl+d: Run Downward ==> from current line to downward
+- shift+ctrl+f: Run Upward ==> from first line till current line
 
 ## Requirements
 
