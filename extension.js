@@ -39,6 +39,11 @@ function CheckEditor(editor) {
 
 }
 
+function ShowError() {
+    let mgs = 'The editor look empty, please adding some stata code or command'
+    vscode.window.showErrorMessage(mgs);
+}
+
 function activate(context) {
 
     // Use the console to output diagnostic information (console.log) and errors (console.error)
@@ -54,8 +59,7 @@ function activate(context) {
                 saveToFile(code)
             }
             else {
-                let mgs = 'The editor look empty, please adding some stata code or command'
-                vscode.window.showErrorMessage(mgs);
+                ShowError()
             }
         }
         context.subscriptions.push(runAll);
@@ -72,9 +76,7 @@ function activate(context) {
                 saveToFile(code)
             }
             else {
-                let mgs = 'Can not run your selection.'
-                vscode.window.showWarningMessage(mgs);
-                this.runAll()// Try to run the whole file if no selection is made
+                ShowError()
             }
         }
         context.subscriptions.push(runSelection);
@@ -99,9 +101,7 @@ function activate(context) {
                 saveToFile(code)
             }
             else {
-                let mgs = 'Cannot run to bottom, Check your selection.'
-                vscode.window.showWarningMessage(mgs);
-                this.runAll()// Try to run the whole file if no selection is made
+                ShowError()
             }
         }
         context.subscriptions.push(runDown);
@@ -123,9 +123,7 @@ function activate(context) {
                 saveToFile(code)
             }
             else {
-                let mgs = 'Cannot run Current line, Check your selection.'
-                vscode.window.showWarningMessage(mgs);
-                this.runAll()// Try to run the whole file if no selection is made
+                ShowError()
             }
         }
         context.subscriptions.push(runCurrent);
@@ -148,9 +146,7 @@ function activate(context) {
                 saveToFile(code)
             }
             else {
-                let mgs = 'Cannot run from top, Check your selection.'
-                vscode.window.showWarningMessage(mgs);
-                this.runAll()// Try to run the whole file if no selection is made
+                ShowError()
             }
         }
         context.subscriptions.push(runFront);
