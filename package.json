@@ -3,7 +3,7 @@
     "icon": "images/icon.png",
     "displayName": "stataRun",
     "description": "Run Stata Code from vsCode",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "publisher": "Yeaoh",
     "engines": {
         "vscode": "^1.25.0"
@@ -23,23 +23,23 @@
         "commands": [
             {
                 "command": "extension.runAll",
-                "title": "Run entire File"
+                "title": "stataRun: All Lines"
             },
             {
                 "command": "extension.runSelection",
-                "title": "Run Selection"
+                "title": "stataRun: Selection"
             },
             {
                 "command": "extension.runCurrent",
-                "title": "Run Current line"
+                "title": "stataRun: Current line"
             },
             {
                 "command": "extension.runDown",
-                "title": "Run to Bottom"
+                "title": "stataRun: Downward Lines"
             },
             {
                 "command": "extension.runFront",
-                "title": "Run from front line"
+                "title": "stataRun: Frontward line"
             }
         ],
         "configuration": [
