@@ -39,7 +39,7 @@
             },
             {
                 "command": "extension.runFront",
-                "title": "stataRun: Frontward line"
+                "title": "stataRun: Frontward Lines"
             }
         ],
         "configuration": [
@@ -119,7 +119,38 @@
                 "command": "extension.runFront",
                 "when": "editorTextFocus"
             }
-        ]
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "resourceLangId == stata",
+                    "command": "extension.runAll",
+                    "group": "stataRun"
+                },
+                {
+                    "when": "resourceLangId == stata",
+                    "command": "extension.runSelection",
+                    "group": "stataRun"
+                },
+                {
+                    "when": "resourceLangId == stata",
+                    "command": "extension.runCurrent",
+                    "group": "stataRun"
+                },
+                {
+                    "when": "resourceLangId == stata",
+                    "command": "extension.runDown",
+                    "group": "stataRun"
+                },
+                {
+                    "when": "resourceLangId == stata",
+                    "command": "extension.runFront",
+                    "group": "stataRun"
+                }
+
+
+            ]
+        }
     },
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
