@@ -50,7 +50,7 @@ function activate(context) {
     // This line of code will only be executed once when your extension is activated
     console.log('Congratulations, your extension "stata-run" is now active!');
 
-    let runAll = vscode.commands.registerCommand('extension.runAll', function () {
+    let runAll = vscode.commands.registerCommand('stataRun.runAll', function () {
         // Run Full file
         let editor = CheckEditor(vscode.window.activeTextEditor)
         if (editor){
@@ -66,7 +66,7 @@ function activate(context) {
 
     });
 
-    let runSelection = vscode.commands.registerCommand('extension.runSelection', function () {
+    let runSelection = vscode.commands.registerCommand('stataRun.runSelection', function () {
         // Run Selection text
         let editor = CheckEditor(vscode.window.activeTextEditor)
         if (editor){
@@ -83,7 +83,7 @@ function activate(context) {
 
     });
 
-    let runDown = vscode.commands.registerCommand('extension.runDown', function () {
+    let runDown = vscode.commands.registerCommand('stataRun.runDown', function () {
         // Run Selection from current line to bottom
         let editor = CheckEditor(vscode.window.activeTextEditor)
         if (editor){
@@ -107,7 +107,7 @@ function activate(context) {
         context.subscriptions.push(runDown);
 
     });
-    let runCurrent = vscode.commands.registerCommand('extension.runCurrent', function () {
+    let runCurrent = vscode.commands.registerCommand('stataRun.runCurrent', function () {
         // Run Selection from current line to bottom
         let editor = CheckEditor(vscode.window.activeTextEditor)
         if (editor){
@@ -130,7 +130,7 @@ function activate(context) {
 
     });
 
-    let runFront= vscode.commands.registerCommand('extension.runFront', function () {
+    let runFront= vscode.commands.registerCommand('stataRun.runFront', function () {
         // Run Selection from current line to bottom
         let editor = CheckEditor(vscode.window.activeTextEditor)
         if (editor){

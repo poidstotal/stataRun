@@ -5,7 +5,7 @@ const fs = require('fs');
 const runApplescript = require('run-applescript');
 const escapeString = require('escape-string-applescript');
 const vscode = require('vscode');
-var config = vscode.workspace.getConfiguration('stata_run');
+var config = vscode.workspace.getConfiguration('stataRun');
 
 function tellApple(cmd, text) {
   // this method is called when your extension is deactivated
@@ -19,13 +19,13 @@ function tellApple(cmd, text) {
         console.error('code: ', text);
         return console.error('Applescript: ', cmd);
       });
-  
+
 }
 module.exports = {
   previousCommand: '',
   winax: null,
 
-  send(text, batch=false) {
+  send(text) {
     console.log('entering sendCode function');
     this.previousCommand = text;
     switch (process.platform) {
@@ -44,7 +44,7 @@ module.exports = {
     console.log('requiring winax')
     const os = require('os');
     var winaxPath = os.homedir();
-    winaxPath += "/.atom/packages/stata_run/node_modules/winax";
+    winaxPath += "/.atom/packages/stataRun/node_modules/winax";
     try {
       return require(winaxPath);
     } catch (err) {
@@ -67,8 +67,15 @@ module.exports = {
       return this.con.DoCommandAsync(text);
     }
 
-    spawn(config.get('stataPath'), { stdio: 'ignore', detached: true }).unref();
-    
+    //spawn(config.get('stataPath'), { stdio: 'ignore', detached: true }).unref();
+    //spawn(config.get('stataPath'));
+    const child = spawn(config.get('stataPath'), [text], {
+      detached: true,
+      stdio: 'ignore'
+    });
+
+    child.unref();
+
     return delay(2000)
       .then(() => {
         try {
@@ -111,7 +118,7 @@ module.exports = {
     var cmd = '';
     cmd += `tell application "${whichApp}" to DoCommandAsync "${text}"\n`;
     tellApple(cmd, text)
-    
+
   },
   sendLinux(text) {
     var exec = require('child_process').exec;
@@ -127,7 +134,7 @@ module.exports = {
       old_cb="$(xclip -o -selection clipboard)";
       this_window="$(xdotool getactivewindow)" &&
       stata_window="$(xdotool search --name --limit 1 "Stata/(IC|SE|MP)? 1[0-9]\.[0-9]")" &&
-      cat ~/.stata_run_code | xclip -i -selection clipboard &&
+      cat ~/.stataRun_code | xclip -i -selection clipboard &&
       xdotool \
         keyup ctrl shift \
         windowactivate --sync $stata_window \
@@ -135,7 +142,7 @@ module.exports = {
         windowactivate --sync $this_window;
       printf "$old_cb" | xclip -i -selection clipboard`;
 
-    var codepath = path.join(process.env.HOME, '.stata_run_code');
+    var codepath = path.join(process.env.HOME, '.stataRun_code');
     fs.writeFile(codepath, text, function(err) {
       if(err) {
         console.log(err);

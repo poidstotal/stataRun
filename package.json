@@ -3,7 +3,7 @@
     "icon": "images/icon.png",
     "displayName": "stataRun",
     "description": "Run Stata Code from vsCode",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "publisher": "Yeaoh",
     "engines": {
         "vscode": "^1.25.0"
@@ -12,33 +12,33 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.runAll",
-        "onCommand:extension.runSelection",
-        "onCommand:extension.runCurrent",
-        "onCommand:extension.runDown",
-        "onCommand:extension.runFront"
+        "onCommand:stataRun.runAll",
+        "onCommand:stataRun.runSelection",
+        "onCommand:stataRun.runCurrent",
+        "onCommand:stataRun.runDown",
+        "onCommand:stataRun.runFront"
     ],
-    "main": "./extension.js",
+    "main": "./stataRun.js",
     "contributes": {
         "commands": [
             {
-                "command": "extension.runAll",
+                "command": "stataRun.runAll",
                 "title": "stataRun: All Lines"
             },
             {
-                "command": "extension.runSelection",
+                "command": "stataRun.runSelection",
                 "title": "stataRun: Selection"
             },
             {
-                "command": "extension.runCurrent",
+                "command": "stataRun.runCurrent",
                 "title": "stataRun: Current line"
             },
             {
-                "command": "extension.runDown",
+                "command": "stataRun.runDown",
                 "title": "stataRun: Downward Lines"
             },
             {
-                "command": "extension.runFront",
+                "command": "stataRun.runFront",
                 "title": "stataRun: Frontward Lines"
             }
         ],
@@ -47,12 +47,12 @@
                 "type": "object",
                 "title": "stataRun",
                 "properties": {
-                    "stata_run.stataPath": {
+                    "stataRun.stataPath": {
                         "type": "string",
                         "default": "C:\\Program Files (x86)\\Stata15\\StataSE-64.exe",
                         "description": "Absolute path to Stata executable. Only applicable for Windows."
                     },
-                    "stata_run.whichApp": {
+                    "stataRun.whichApp": {
                         "type": "string",
                         "enum": [
                             "stataMP",
@@ -63,22 +63,22 @@
                         "default": "stataSE",
                         "description": "Which application to send code to. Only applicable for MacOS."
                     },
-                    "stata_run.advancePosition": {
+                    "stataRun.advancePosition": {
                         "type": "boolean",
                         "default": "false",
                         "description": "Cursor advances to the next line after sending the current line when there is no selection."
                     },
-                    "stata_run.skipComments": {
+                    "stataRun.skipComments": {
                         "type": "boolean",
                         "default": "true",
                         "description": "When 'advancePosition' is true, skip lines that contain only comments"
                     },
-                    "stata_run.focusWindow": {
+                    "stataRun.focusWindow": {
                         "type": "boolean",
                         "default": "true",
                         "description": "After code is sent, bring focus to where it was sent"
                     },
-                    "stata_run.pasteSpeed": {
+                    "stataRun.pasteSpeed": {
                         "type": "number",
                         "minimum": "1.0",
                         "maximum": "10",
@@ -92,63 +92,61 @@
             {
                 "key": "shift+ctrl+a",
                 "mac": "shift+cmd+a",
-                "command": "extension.runAll",
+                "command": "stataRun.runAll",
                 "when": "editorTextFocus"
             },
             {
                 "key": "shift+ctl+s",
                 "mac": "shift+cmd+s",
-                "command": "extension.runSelection",
+                "command": "stataRun.runSelection",
                 "when": "editorTextFocus"
             },
             {
                 "key": "shift+ctl+c",
                 "mac": "shift+cmd+c",
-                "command": "extension.runCurrent",
+                "command": "stataRun.runCurrent",
                 "when": "editorTextFocus"
             },
             {
                 "key": "shift+ctl+d",
                 "mac": "shift+cmd+d",
-                "command": "extension.runDown",
+                "command": "stataRun.runDown",
                 "when": "editorTextFocus"
             },
             {
                 "key": "shift+ctl+f",
                 "mac": "shift+cmd+f",
-                "command": "extension.runFront",
+                "command": "stataRun.runFront",
                 "when": "editorTextFocus"
             }
         ],
         "menus": {
             "editor/context": [
                 {
-                    "when": "resourceLangId == stata",
-                    "command": "extension.runAll",
+                    "when": "resourceLangId == stata | resourceLangId == text ",
+                    "command": "stataRun.runAll",
                     "group": "stataRun"
                 },
                 {
                     "when": "resourceLangId == stata",
-                    "command": "extension.runSelection",
+                    "command": "stataRun.runSelection",
                     "group": "stataRun"
                 },
                 {
                     "when": "resourceLangId == stata",
-                    "command": "extension.runCurrent",
+                    "command": "stataRun.runCurrent",
                     "group": "stataRun"
                 },
                 {
                     "when": "resourceLangId == stata",
-                    "command": "extension.runDown",
+                    "command": "stataRun.runDown",
                     "group": "stataRun"
                 },
                 {
                     "when": "resourceLangId == stata",
-                    "command": "extension.runFront",
+                    "command": "stataRun.runFront",
                     "group": "stataRun"
                 }
-
-
             ]
         }
     },
@@ -159,7 +157,7 @@
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
-        "eslint": "^4.11.0",
+        "eslint": "^4.19.1",
         "vscode": "^1.1.6"
     },
     "dependencies": {
