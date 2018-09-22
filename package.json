@@ -3,7 +3,7 @@
     "icon": "images/icon.png",
     "displayName": "stataRun",
     "description": "Run Stata Code from vsCode",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "publisher": "Yeaoh",
     "engines": {
         "vscode": "^1.25.0"
@@ -123,7 +123,7 @@
         "menus": {
             "editor/context": [
                 {
-                    "when": "resourceLangId == stata | resourceLangId == text ",
+                    "when": "resourceLangId == stata",
                     "command": "stataRun.runAll",
                     "group": "stataRun"
                 },
