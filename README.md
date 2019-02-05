@@ -16,6 +16,9 @@ The following command and keyboard shortcut are implemented (crtl to be replace 
 Settings derived from [stata-exec](https://github.com/kylebarron/stata-exec), which provide the same features for Atom.
 ![run-command](./images/config.png)
 
+### Linux
+Requirements for Linux are `xdotool` and `xclip` as in the Atom version
+
 ## Known Issues
 
 Only tested with Mac Os so far. Please and try create issues if any. Feel free to contributes.
