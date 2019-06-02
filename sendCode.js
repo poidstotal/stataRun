@@ -69,12 +69,11 @@ module.exports = {
 
     //spawn(config.get('stataPath'), { stdio: 'ignore', detached: true }).unref();
     //spawn(config.get('stataPath'));
-    const child = spawn(config.get('stataPath'), [], {
+    const child = spawn(config.get('stataPath'),[], {
       detached: true,
       stdio: 'ignore'
-    });
+    }).unref();
 
-    child.unref();
 
     return delay(2000)
       .then(() => {
