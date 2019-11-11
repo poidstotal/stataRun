@@ -1,14 +1,15 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
-let fs = require('fs')
+let fs = require('fs');
+let os = require('os');
 const sendCode = require('./sendCode');
 
 function saveToFile(code) {
     if (code) {
-        var temp = require('os').tmpdir()
-        var filePath = temp+"/"+ Date.now()
-        filePath +='.do'
+        var temp = os.tmpdir();
+        var filePath = temp+"/"+ Date.now();
+        filePath +='.do';
          //var filePath="/Volumes/MediaDocs/Codes/stata-run/mydofile.do";
          fs.writeFile(filePath, code + "\n", (err) => {
              if (err) throw err;
@@ -17,8 +18,6 @@ function saveToFile(code) {
          const doFileCommand = 'do '+filePath;
          return sendCode.send(doFileCommand);
          //vscode.window.showInformationMessage(filePath);
-
-
      }
      else {
          return;// Document is empty
@@ -36,12 +35,23 @@ function CheckEditor(editor) {
     else {
         return editor;
     }
-
 }
 
 function ShowError() {
     let mgs = 'The editor look empty, please adding some stata code or command'
     vscode.window.showErrorMessage(mgs);
+}
+
+// Remove comments <- from stata-exec
+function removeComments(text) {
+    text = text.replace(/((["'])(?:\\[\s\S]|.)*?\2|(?:[^\w\s]|^)\s*\/(?![*\/])(?:\\.|\[(?:\\.|.)\]|.)*?\/(?=[gmiy]{0,4}\s*(?![*\/])(?:\W|$)))|\/\/\/.*?\r?\n\s*|\/\/.*?$|\/\*[\s\S]*?\*\//gm, '$1');
+    // https://stackoverflow.com/questions/24518020/comprehensive-regexp-to-remove-javascript-comments
+    // Using the "Final Boss Fight" at the bottom. Otherwise it fails on `di 5 / 5 // hello`
+    // code = code.replace(';', '')
+    if (process.platform == 'win32') {
+      text = text + '\r';
+    }
+    return text;
 }
 
 function activate(context) {
@@ -56,14 +66,21 @@ function activate(context) {
         if (editor){
             let code = editor.document.getText()
             if (code.length > 0){
-                saveToFile(code)
+                // If document is unsaved, then save temp file and run the do-file
+                if (editor.document.isUntitled){
+                    saveToFile(code)
+                }
+                // Else just run the do-file
+                else {
+                    var cwd = editor.document.uri.fsPath;
+                    sendCode.send('do `"' + cwd + '"\'')
+                }
             }
             else {
                 ShowError()
             }
         }
         context.subscriptions.push(runAll);
-
     });
 
     let runSelection = vscode.commands.registerCommand('stataRun.runSelection', function () {
@@ -73,7 +90,12 @@ function activate(context) {
             let selection = editor.selection;
             let code = editor.document.getText(selection);
             if (code){
-                saveToFile(code)
+                if (code.length > 8192) {
+                    saveToFile(code);
+                }
+                else {
+                    sendCode.send(removeComments(code));
+                }
             }
             else {
                 ShowError()
@@ -98,7 +120,12 @@ function activate(context) {
                 var code = editor.document.getText(range);
             }
             if (code){
-                saveToFile(code)
+                if (code.length > 8192) {
+                    saveToFile(code);
+                }
+                else {
+                    sendCode.send(removeComments(code));
+                }
             }
             else {
                 ShowError()
@@ -111,23 +138,27 @@ function activate(context) {
         // Run Selection from current line to bottom
         let editor = CheckEditor(vscode.window.activeTextEditor)
         if (editor){
-            const position = editor.selection.active.line
-            const first = new vscode.Position(position,0)
-            const lastpos= editor.document.lineAt(position)
-            const last = new vscode.Position(position,lastpos.range.end.character)
+            const position = editor.selection.active
+            const first = new vscode.Position(position.line,0)
+            const lastpos= editor.document.lineAt(position.line)
+            const last = new vscode.Position(position.line, lastpos.range.end.character)
             if (first != last) {
-                const range = new vscode.Range(first,last);
+                const range = new vscode.Range(first, last);
                 var code = editor.document.getText(range);
             }
             if (code){
-                saveToFile(code)
+                if (code.length > 8192) {
+                    saveToFile(code);
+                }
+                else {
+                    sendCode.send(removeComments(code));
+                }
             }
             else {
                 ShowError()
             }
         }
         context.subscriptions.push(runCurrent);
-
     });
 
     let runFront= vscode.commands.registerCommand('stataRun.runFront', function () {
@@ -143,7 +174,12 @@ function activate(context) {
                 var code = editor.document.getText(range);
             }
             if (code){
-                saveToFile(code)
+                if (code.length > 8192) {
+                    saveToFile(code);
+                }
+                else {
+                    sendCode.send(removeComments(code));
+                }
             }
             else {
                 ShowError()
@@ -152,10 +188,6 @@ function activate(context) {
         context.subscriptions.push(runFront);
 
     });
-
-
-
-
 }
 exports.activate = activate;
 
