@@ -19,8 +19,8 @@ Settings derived from [stata-exec](https://github.com/kylebarron/stata-exec), wh
 ### Linux
 Requirements for Linux are `xdotool` and `xclip` as in the Atom version
 
-### Windows 
-Installation instructions for Windows basically follows the original Atom [stata-exec](https://atom.io/packages/stata-exec) building manual with some modifications for `code`. 
+### Windows
+Installation instructions for Windows basically follows the original Atom [stata-exec](https://atom.io/packages/stata-exec) building manual with some modifications for `code`.
 
 1. Install the `runStata` package. I also recommend the `Stata Enhanced` package for code highlighting.
 
@@ -67,6 +67,5 @@ Only tested with Mac Os so far. Please and try create issues if any. Feel free t
 
 Install as a normal vscode extension by searcing for stataRun in the vscode extension marketplace
 ## Release
-1.1.5
-  - Fix bug that load the same file over and over
-  - Add "stataRun" to each command in the to avoid confusion
+2.0.1
+  - Improvement for working on Windows and Linux
