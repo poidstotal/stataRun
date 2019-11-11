@@ -43,8 +43,8 @@ module.exports = {
   defineWinax(){
     console.log('requiring winax')
     const os = require('os');
-    var winaxPath = os.homedir();
-    winaxPath += "/.atom/packages/stataRun/node_modules/winax";
+    var winaxPath = vscode.extensions.getExtension("Yeaoh.stataRun").extensionPath;
+    winaxPath += "/node_modules/winax";
     try {
       return require(winaxPath);
     } catch (err) {
@@ -69,12 +69,11 @@ module.exports = {
 
     //spawn(config.get('stataPath'), { stdio: 'ignore', detached: true }).unref();
     //spawn(config.get('stataPath'));
-    const child = spawn(config.get('stataPath'), [text], {
+    const child = spawn(config.get('stataPath'),[], {
       detached: true,
       stdio: 'ignore'
-    });
+    }).unref();
 
-    child.unref();
 
     return delay(2000)
       .then(() => {
