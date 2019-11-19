@@ -1,3 +1,4 @@
+// @ts-nocheck
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
@@ -8,9 +9,8 @@ const sendCode = require('./sendCode');
 function saveToFile(code) {
     if (code) {
         var temp = os.tmpdir();
-        var filePath = temp+"/"+ Date.now();
+        var filePath = temp +"/StataRun"+Date.now();
         filePath +='.do';
-         //var filePath="/Volumes/MediaDocs/Codes/stata-run/mydofile.do";
          fs.writeFile(filePath, code + "\n", (err) => {
              if (err) throw err;
              console.log('The file has been saved!');
@@ -20,9 +20,9 @@ function saveToFile(code) {
          //vscode.window.showInformationMessage(filePath);
      }
      else {
-         return;// Document is empty
+        let mgs = 'Document is empty'
+        vscode.window.showWarningMessage(mgs);
      }
-
 }
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -40,18 +40,6 @@ function CheckEditor(editor) {
 function ShowError() {
     let mgs = 'The editor look empty, please adding some stata code or command'
     vscode.window.showErrorMessage(mgs);
-}
-
-// Remove comments <- from stata-exec
-function removeComments(text) {
-    text = text.replace(/((["'])(?:\\[\s\S]|.)*?\2|(?:[^\w\s]|^)\s*\/(?![*\/])(?:\\.|\[(?:\\.|.)\]|.)*?\/(?=[gmiy]{0,4}\s*(?![*\/])(?:\W|$)))|\/\/\/.*?\r?\n\s*|\/\/.*?$|\/\*[\s\S]*?\*\//gm, '$1');
-    // https://stackoverflow.com/questions/24518020/comprehensive-regexp-to-remove-javascript-comments
-    // Using the "Final Boss Fight" at the bottom. Otherwise it fails on `di 5 / 5 // hello`
-    // code = code.replace(';', '')
-    if (process.platform == 'win32') {
-      text = text + '\r';
-    }
-    return text;
 }
 
 function activate(context) {
@@ -90,12 +78,7 @@ function activate(context) {
             let selection = editor.selection;
             let code = editor.document.getText(selection);
             if (code){
-                if (code.length > 8192) {
-                    saveToFile(code);
-                }
-                else {
-                    sendCode.send(removeComments(code));
-                }
+                saveToFile(code)
             }
             else {
                 ShowError()
@@ -120,12 +103,7 @@ function activate(context) {
                 var code = editor.document.getText(range);
             }
             if (code){
-                if (code.length > 8192) {
-                    saveToFile(code);
-                }
-                else {
-                    sendCode.send(removeComments(code));
-                }
+                saveToFile(code)
             }
             else {
                 ShowError()
@@ -147,12 +125,7 @@ function activate(context) {
                 var code = editor.document.getText(range);
             }
             if (code){
-                if (code.length > 8192) {
-                    saveToFile(code);
-                }
-                else {
-                    sendCode.send(removeComments(code));
-                }
+                saveToFile(code)
             }
             else {
                 ShowError()
@@ -174,12 +147,7 @@ function activate(context) {
                 var code = editor.document.getText(range);
             }
             if (code){
-                if (code.length > 8192) {
-                    saveToFile(code);
-                }
-                else {
-                    sendCode.send(removeComments(code));
-                }
+                saveToFile(code)
             }
             else {
                 ShowError()
