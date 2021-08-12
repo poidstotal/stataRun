@@ -28,6 +28,12 @@ module.exports = {
   send(text) {
     console.log('entering sendCode function');
     this.previousCommand = text;
+
+    var vsterm = config.get('vscodeTerminal');
+    if (vsterm == true) {
+      return this.sendTerminal(text)
+    }
+
     switch (process.platform) {
       case 'darwin':
         return this.sendMac(text);
@@ -183,5 +189,26 @@ module.exports = {
         console.error('code: ', text);
         return console.error('Applescript: ', cmd);
       });
+  },
+  sendTerminal(text) {
+    let activeTermOrNull = vscode.window.activeTerminal;
+
+    // let activeTerm = activeTermOrNull |
+    if (activeTermOrNull === null || activeTermOrNull === undefined) {
+      console.log("Not referencing any terminal and no terminal is open. Therefore creating new terminal.");
+      activeTermOrNull = vscode.window.createTerminal("StataRun");
+      activeTermOrNull.show(true);
+
+      var cmd = config.get('vscodeTerminalBin');
+      cmd += " " + text
+      activeTermOrNull.sendText(cmd, true);
+    }
+    else {
+      let activeTerm = activeTermOrNull;
+      activeTerm.show(true);
+      console.log(`StataRun|${text}`);
+      activeTerm.sendText(text, true);
+    }
   }
+
 };
