@@ -84,6 +84,16 @@
                         "maximum": "10",
                         "default": "true",
                         "description": " This is only applicable for XQuartz. This value changes the amount of time the program waits between switching to the XQuartz window, pasting code, and sending enter'. The only way to send code to XQuartz is to use the clipboard, and the responsiveness of sending code will depend on the speed of your internet connection. If the copy-pasting isn't working, try increasing the value. Decreasing the value will run your code faster. Value must be between 0.1 and 10."
+                    },
+                    "stataRun.vscodeTerminal": {
+                        "type": "boolean",
+                        "default": "false",
+                        "description": "stataRun sends lines to built-in VS Code terminal window"
+                    },
+                    "stataRun.vscodeTerminalBin": {
+                        "type": "string",
+                        "default": "stata-se",
+                        "description": "Command to run when a terminal window is created"
                     }
                 }
             }
